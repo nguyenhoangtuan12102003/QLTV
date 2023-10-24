@@ -148,7 +148,7 @@ public class LoginGUI extends JFrame {
         checkboxrm.setFont(
                 new Font("Consolas", checkboxrm.getFont().getStyle() | Font.BOLD, checkboxrm.getFont().getSize() + 8));
         checkboxrm.setBounds(250, 310, 203, 25);
-        //quen mat khau
+//        quen mat khau
 //        JButton btnForgotPassword = new JButton("Quên mật khẩu");
 //        btnForgotPassword.setFont(new Font("Consolas", btnForgotPassword.getFont().getStyle() | Font.BOLD,
 //                btnForgotPassword.getFont().getSize() + 8));
