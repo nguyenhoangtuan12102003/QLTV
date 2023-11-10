@@ -3,14 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package GUI;
-//import java.awt.BorderLayout;
-//import java.awt.EventQueue;
-//import java.io.File;
-//import java.io.IOException;
-//import java.sql.Connection;
-//import java.sql.ResultSet;
-//import java.sql.Statement;
-
 import java.util.ArrayList;
 import java.util.prefs.Preferences;
 
