@@ -59,7 +59,7 @@ public class CouponGUI extends javax.swing.JPanel {
         btnClickStaffId = new javax.swing.JButton();
         btnSupplierId = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        txtCouponId = new javax.swing.JTextField();
+        lblCouponID = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbCoupon = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -159,7 +159,7 @@ public class CouponGUI extends javax.swing.JPanel {
 
         jLabel8.setText("Mã Phiếu Nhập");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
-        jPanel1.add(txtCouponId, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 140, -1));
+        jPanel1.add(lblCouponID, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 140, 30));
 
         tbCoupon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -169,7 +169,7 @@ public class CouponGUI extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Mã PN", "Mã NV", "Mã NCC", "Ngày Mượn"
+                "Mã PN", "Mã NV", "Mã NCC", "Ngày Nhập"
             }
         ));
         tbCoupon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -251,9 +251,9 @@ public class CouponGUI extends javax.swing.JPanel {
 
         jLabel5.setText("Mã Sách");
 
-        jLabel6.setText("Giá Nhập");
+        jLabel6.setText("Số Lượng");
 
-        jLabel7.setText("Số Lượng");
+        jLabel7.setText("Giá Nhập");
 
         txtBookIdCoupon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -347,15 +347,11 @@ public class CouponGUI extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddCouponDetail)
                     .addComponent(btnEditCouponDetail))
@@ -451,7 +447,7 @@ public class CouponGUI extends javax.swing.JPanel {
         int masach = Integer.parseInt(txtBookIdCoupon.getText());
         int sl = Integer.parseInt(txtQuantity.getText());
         int gia = Integer.parseInt(txtPrice.getText());
-        CouponDetailDTO ct = new CouponDetailDTO(0, Integer.parseInt(txtCouponId.getText()), masach, gia, sl, sl * gia);
+        CouponDetailDTO ct = new CouponDetailDTO(0, Integer.parseInt(lblCouponID.getText()), masach, gia, sl, sl * gia);
         int j = couponDetailBUS.addCouponDetail(ct);
         if (j > 0) {
             loadCouponDetail();
@@ -601,7 +597,7 @@ public class CouponGUI extends javax.swing.JPanel {
         int i = tbCoupon.getSelectedRow();
         if (i >= 0) {
 //            mapn = Integer.parseInt(dftCoupon.getValueAt(i, 0).toString());
-            txtCouponId.setText(dftCoupon.getValueAt(i, 0).toString());
+            lblCouponID.setText(dftCoupon.getValueAt(i, 0).toString());
             txtStaffId.setText(dftCoupon.getValueAt(i, 0).toString());
             txtSupplierId.setText(dftCoupon.getValueAt(i, 1).toString());
             Date date2;
@@ -793,10 +789,10 @@ public class CouponGUI extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblCouponID;
     private javax.swing.JTable tbCoupon;
     private javax.swing.JTable tbCouponDetail;
     public static javax.swing.JTextField txtBookIdCoupon;
-    private javax.swing.JTextField txtCouponId;
     private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtQuantity;
     private javax.swing.JTextField txtSearchCoupon;

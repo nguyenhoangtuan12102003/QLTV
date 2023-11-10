@@ -60,4 +60,8 @@ public class AccountDTO {
     public AccountDTO(){
         super();
     }
+     public AccountDTO(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 }

@@ -27,12 +27,28 @@ public class CouponBUS {
     }
 
     public int addCoupon(CouponDTO pm) {
-        if (couponDAL.addCoupon(pm) > 0) {
-            JOptionPane.showMessageDialog(null, "Thêm phiếu nhập thành công");
-            return 1;
+        try {
+            if (pm.getCoupon_id() < 0) {
+                JOptionPane.showMessageDialog(null, "Mã nhân viên sai");
+                return -1;
+            }
+            if (pm.getSuperlier_id() < 0) {
+                JOptionPane.showMessageDialog(null, "Mã nhà cung cấp sai");
+                return -1;
+            }
+            if (pm.getDate_add() == null) {
+                JOptionPane.showMessageDialog(null, "Không được để trống ngày nhập");
+                return -1;
+            }
+            if (couponDAL.addCoupon(pm) > 0) {
+                JOptionPane.showMessageDialog(null, "Thêm phiếu nhập thành công");
+                return 1;
+            }
+            JOptionPane.showMessageDialog(null, "Thêm phiếu nhập thất bại");
+            return -1;
+        } catch (Exception e) {
+            return -1;
         }
-        JOptionPane.showMessageDialog(null, "Thêm phiếu nhập thất bại");
-        return -1;
     }
 
     public int editCoupon(CouponDTO pm) {

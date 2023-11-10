@@ -23,6 +23,7 @@ public class MenuleftGUI extends JFrame {
     private JLabel lblreader;
     private JLabel lblborrow;
     private JLabel lblimport;
+    private JLabel lblBorrowBook;
     private JPanel panelBook;
     private JPanel panelHome;
     private JPanel panelAuthor;
@@ -33,8 +34,9 @@ public class MenuleftGUI extends JFrame {
     private final JPanel panelStatis;
     private final JPanel panelBorrow;
     private final JPanel panelCoupon;
+    public boolean isMouseOver = false;
+    private JPanel panelBorrowBooks;
 
-//     trưởng : home, book, author
     public MenuleftGUI() {
 
         setUndecorated(true);
@@ -79,7 +81,8 @@ public class MenuleftGUI extends JFrame {
         panelPublish.add(publish, BorderLayout.CENTER);
         // Jpanel Statistical
         panelStatis = new JPanel();
-        StatisticalGUI statis = new StatisticalGUI();
+//        Statistical_2GUI statis = new Statistical_2GUI();
+        Statistical_GUI statis = new Statistical_GUI();
         panelStatis.setLayout(new BorderLayout());
         panelStatis.add(statis, BorderLayout.CENTER);
         // Jpanel Borrow
@@ -92,7 +95,12 @@ public class MenuleftGUI extends JFrame {
         CouponGUI coupon = new CouponGUI();
         panelCoupon.setLayout(new BorderLayout());
         panelCoupon.add(coupon, BorderLayout.CENTER);
-        createMenuLeft();
+
+        //Jpanel BorrowBooks
+        panelBorrowBooks = new JPanel();
+        BorrowBooks borrowBook = new BorrowBooks();
+        panelBorrowBooks.setLayout(new BorderLayout());
+        panelBorrowBooks.add(borrowBook, BorderLayout.CENTER);
 
         // card layout
         JPanel cardPanel = new JPanel(cardlayout);
@@ -105,6 +113,7 @@ public class MenuleftGUI extends JFrame {
         cardPanel.add(panelStatis, "statis");
         cardPanel.add(panelBorrow, "borrow");
         cardPanel.add(panelCoupon, "coupon");
+        cardPanel.add(panelBorrowBooks, "borrowBook");
         contentPane.add(cardPanel, BorderLayout.CENTER);
 
         // Home
@@ -127,13 +136,11 @@ public class MenuleftGUI extends JFrame {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 lblhome.setBackground(new Color(0, 206, 209));
-
             }
         });
         // Book
@@ -351,14 +358,39 @@ public class MenuleftGUI extends JFrame {
                 lblimport.setBackground(new Color(0, 206, 209));
             }
         });
-        title();
+        lblBorrowBook.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                cardlayout.show(cardPanel, "borrowBook");
+                lblBorrowBook.setBackground(Color.GRAY);
+            }
 
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                lblhome.setBackground(new Color(0, 206, 209));
+            }
+        });
+        title();
     }
 
-    public MenuleftGUI(boolean Home, boolean Book, boolean Author, boolean Staff, boolean Reader, boolean Publish, boolean Statis, boolean Borrow, boolean Coupon) {
+    public MenuleftGUI(boolean Home, boolean Book, boolean Author, boolean Staff, boolean Reader, boolean Publish, boolean Statis, boolean Borrow, boolean Coupon, boolean BorrowBook) {
 
         setUndecorated(true);
-        setBounds(50, 50, 1200, 650);
+        setBounds(50, 50, 1250, 750);
         contentPane = new JPanel();
         cardlayout = new CardLayout();
         contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -399,7 +431,8 @@ public class MenuleftGUI extends JFrame {
         panelPublish.add(publish, BorderLayout.CENTER);
         // Jpanel Statistical
         panelStatis = new JPanel();
-        StatisticalGUI statis = new StatisticalGUI();
+//        Statistical_2GUI statis = new Statistical_2GUI();
+        Statistical_GUI statis = new Statistical_GUI();
         panelStatis.setLayout(new BorderLayout());
         panelStatis.add(statis, BorderLayout.CENTER);
         // Jpanel Borrow
@@ -413,8 +446,15 @@ public class MenuleftGUI extends JFrame {
         panelCoupon.setLayout(new BorderLayout());
         panelCoupon.add(coupon, BorderLayout.CENTER);
 
+        //Jpanel BorrowBooks
+        panelBorrowBooks = new JPanel();
+        BorrowBooks borrowBook = new BorrowBooks();
+        panelBorrowBooks.setLayout(new BorderLayout());
+        panelBorrowBooks.add(borrowBook, BorderLayout.CENTER);
+
         JPanel cardPanel = new JPanel(cardlayout);
         cardPanel.add(panelHome, "home");
+
         cardPanel.add(panelBook, "book");
 
         cardPanel.add(panelAuthor, "author");
@@ -431,10 +471,12 @@ public class MenuleftGUI extends JFrame {
 
         cardPanel.add(panelCoupon, "coupon");
 
+        cardPanel.add(panelBorrowBooks, "borrowBook");
+
         //create menuleft
         menuleft = new JPanel();
         // Menu bar on the left
-        menuleft.setPreferredSize(new Dimension(180, 650));
+        menuleft.setPreferredSize(new Dimension(180, 750));
         menuleft.setBackground(new Color(0, 206, 209));
         contentPane.add(menuleft, BorderLayout.WEST);
         menuleft.setLayout(null);
@@ -445,9 +487,9 @@ public class MenuleftGUI extends JFrame {
         panel.setBorder(border);
         panel.setBounds(0, 0, 180, 2);
         menuleft.add(panel);
-
         // Home
         lblhome = new JLabel("Trang Chủ");
+
         lblbook = new JLabel("Sách");
         lblauthor = new JLabel("Tác Giả");
         lblstaff = new JLabel("Nhân Viên");
@@ -456,6 +498,8 @@ public class MenuleftGUI extends JFrame {
         lblstatis = new JLabel("Thống Kê");
         lblborrow = new JLabel("Phiếu Mượn");
         lblimport = new JLabel("Phiếu Nhập");
+        lblBorrowBook = new JLabel("Mượn Sách");
+
         if (Home) {
             lblhome.setBackground(new Color(64, 64, 64));
             lblhome.setOpaque(true);
@@ -466,6 +510,7 @@ public class MenuleftGUI extends JFrame {
             lblhome.setBounds(0, 55, 180, 50);
             lblhome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             menuleft.add(lblhome);
+            menuleft.remove(lblBorrowBook);
             menuleft.remove(lblbook);
             menuleft.remove(lblauthor);
             menuleft.remove(lblstaff);
@@ -474,6 +519,7 @@ public class MenuleftGUI extends JFrame {
             menuleft.remove(lblstatis);
             menuleft.remove(lblpublish);
             menuleft.remove(lblreader);
+
         }
 
         //book
@@ -606,6 +652,22 @@ public class MenuleftGUI extends JFrame {
 
         } else {
             menuleft.remove(lblimport);
+        }
+        //muon sach
+        if (BorrowBook) {
+
+            lblBorrowBook.setBackground(new Color(64, 64, 64));
+            lblBorrowBook.setOpaque(true);
+            lblBorrowBook.setForeground(Color.white);
+            lblBorrowBook.setFont(new Font("Tahoma", Font.BOLD, 18));
+            lblBorrowBook.setIcon(new ImageIcon(getClass().getResource("/img/10_borrowbook.png")));
+            lblBorrowBook.setBackground(new Color(0, 206, 209));
+            lblBorrowBook.setBounds(0, 495, 180, 50);
+            lblBorrowBook.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            menuleft.add(lblBorrowBook);
+
+        } else {
+            menuleft.remove(lblBorrowBook);
         }
 
         //
@@ -813,7 +875,6 @@ public class MenuleftGUI extends JFrame {
 
             @Override
             public void mousePressed(MouseEvent e) {
-
             }
 
             @Override
@@ -854,6 +915,32 @@ public class MenuleftGUI extends JFrame {
             @Override
             public void mouseExited(MouseEvent e) {
                 lblimport.setBackground(new Color(0, 206, 209));
+            }
+        });
+        lblBorrowBook.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                cardlayout.show(cardPanel, "borrowBook");
+                lblBorrowBook.setBackground(Color.GRAY);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                lblBorrowBook.setBackground(new Color(0, 206, 209));
             }
         });
         title();
@@ -902,10 +989,6 @@ public class MenuleftGUI extends JFrame {
             }
 
         });
-    }
-
-    public void createMenuLeft() {
-
     }
 
     public static void main(String[] args) {

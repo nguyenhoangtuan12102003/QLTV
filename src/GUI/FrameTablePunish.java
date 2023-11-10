@@ -4,11 +4,13 @@
  */
 package GUI;
 
+import BUS.BorrowBUS;
 import BUS.PunishBUS;
 import DTO.PunishDTO;
 import Export.ExportExcel;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,6 +19,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FrameTablePunish extends javax.swing.JFrame {
 
+    PunishBUS punishBUS = new PunishBUS();
+    PunishDTO punish = new PunishDTO();
     DefaultTableModel dftPunish;
 
     /**
@@ -41,6 +45,7 @@ public class FrameTablePunish extends javax.swing.JFrame {
         tbPunish = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnPrint = new javax.swing.JButton();
+        btnDeletePunish = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,13 +62,22 @@ public class FrameTablePunish extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbPunish);
 
-        jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("sansserif", 2, 18)); // NOI18N
         jLabel1.setText("DANH SÁCH PHẠT");
 
+        btnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/10_publish.png"))); // NOI18N
         btnPrint.setText("In Danh Sách");
         btnPrint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrintActionPerformed(evt);
+            }
+        });
+
+        btnDeletePunish.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/14_delete.png"))); // NOI18N
+        btnDeletePunish.setText("Xóa phiếu");
+        btnDeletePunish.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletePunishActionPerformed(evt);
             }
         });
 
@@ -80,10 +94,12 @@ public class FrameTablePunish extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(275, 275, 275)
-                .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(142, 142, 142)
+                .addComponent(btnDeletePunish, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,9 +108,11 @@ public class FrameTablePunish extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDeletePunish, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         pack();
@@ -104,9 +122,22 @@ public class FrameTablePunish extends javax.swing.JFrame {
         new ExportExcel().xuatExcel(tbPunish);
     }//GEN-LAST:event_btnPrintActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnDeletePunishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletePunishActionPerformed
+        int selectedRow = tbPunish.getSelectedRow();
+        if (selectedRow > 0) {
+            int location = Integer.parseInt(tbPunish.getValueAt(selectedRow, 0).toString());
+            PunishDTO punishDTO = new PunishDTO(location, punish.getBorrow_id(), punish.getReason(), punish.getFine());
+            int a = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa", "", JOptionPane.YES_NO_OPTION);
+            if (a == JOptionPane.YES_OPTION) {
+                int j = punishBUS.deletePunish(punishDTO);
+                if (j > 0) {
+                    loadPunish();
+                }
+            }
+        }
+
+    }//GEN-LAST:event_btnDeletePunishActionPerformed
+
     public static ArrayList<PunishDTO> listPunish = new ArrayList<PunishDTO>();
 
     public void loadPunish() {
@@ -158,6 +189,7 @@ public class FrameTablePunish extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDeletePunish;
     private javax.swing.JButton btnPrint;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

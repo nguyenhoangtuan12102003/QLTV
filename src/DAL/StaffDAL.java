@@ -75,8 +75,6 @@ public class StaffDAL {
             Connection conn = Data.getconnection();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM nhanvien WHERE trangthai = 1");
-            
-            
             while(rs.next()){
                 StaffDTO nv = new StaffDTO();
                 nv.setStaff_id(rs.getInt(1));

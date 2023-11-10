@@ -9,16 +9,16 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import DTO.AccountDTO;
+import java.sql.PreparedStatement;
 
 /**
  *
  * @author hoangtuan
  */
-
 public class AccountDAL {
 
     public static ArrayList<AccountDTO> getdanhsachTK() {
-        Connection conn =null;
+        Connection conn = null;
         try {
             conn = Data.getconnection();
             Statement stmt = conn.createStatement();
@@ -42,4 +42,23 @@ public class AccountDAL {
             Data.closeconection(conn);
         }
     }
+
+    public static int updatePassword(AccountDTO account) {
+        int result = -1;
+        Connection con = null;
+        try {
+            con = Data.getconnection();
+            String sql = "UPDATE taikhoan SET password = ? WHERE username = ?";
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setString(1, account.getPassword());  // Gán mật khẩu mới vào tham số 1
+            st.setString(2, account.getUsername());  // Gán tên người dùng vào tham số 2
+            result = st.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            Data.closeconection(con);
+        }
+        return result;
+    }
+
 }

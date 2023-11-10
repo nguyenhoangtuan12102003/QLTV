@@ -89,6 +89,12 @@ public class LoginGUI extends JFrame {
         contentPane.add(panel);
         panel.setLayout(null);
 
+//        JLabel lblNewLabel_1 = new JLabel("LOGIN");
+//        lblNewLabel_1.setForeground(Color.BLACK);
+//        lblNewLabel_1.setFont(
+//                new Font("Consolas", lblNewLabel_1.getFont().getStyle(), lblNewLabel_1.getFont().getSize() + 21));
+//        lblNewLabel_1.setBounds(100, 59, 107, 58);
+//        panel.add(lblNewLabel_1);
         JLabel lblNewLabel_1_1 = new JLabel("UserName");
         lblNewLabel_1_1.setFont(new Font("Consolas", lblNewLabel_1_1.getFont().getStyle() | Font.BOLD,
                 lblNewLabel_1_1.getFont().getSize() + 8));
@@ -148,17 +154,8 @@ public class LoginGUI extends JFrame {
         checkboxrm.setFont(
                 new Font("Consolas", checkboxrm.getFont().getStyle() | Font.BOLD, checkboxrm.getFont().getSize() + 8));
         checkboxrm.setBounds(250, 310, 203, 25);
-//        quen mat khau
-//        JButton btnForgotPassword = new JButton("Quên mật khẩu");
-//        btnForgotPassword.setFont(new Font("Consolas", btnForgotPassword.getFont().getStyle() | Font.BOLD,
-//                btnForgotPassword.getFont().getSize() + 8));
-//        btnForgotPassword.setForeground(Color.RED);
-//        btnForgotPassword.setBounds(250, 450, 150, 25);
-//        panel.add(btnForgotPassword);
         panel.add(checkboxrm);
         loadtaikhoan();
-     
-
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
 
@@ -171,26 +168,24 @@ public class LoginGUI extends JFrame {
                 for (AccountDTO taiKhoan2 : taikhoan) {
                     if (taiKhoan2.getUsername().trim().equals(txtUser.getText().trim()) && taiKhoan2.getPassword().trim().equals(txtPass.getText().trim())) {
                         switch (taiKhoan2.getPermission_id()) {
-                            case 0: {
-                                MenuleftGUI menuleft = new MenuleftGUI();
+                            case 0 -> {
+                                MenuleftGUI menuleft = new MenuleftGUI(true, true, true, true, true, true, true, true, true,true);
                                 menuleft.setVisible(true);
-                                break;
                             }
-                            case 1: {
+                            case 1 -> {
+
+                                MenuleftGUI menuleft = new MenuleftGUI(true, true, false, true, true, false, false, false, false,true);
+                                menuleft.setVisible(true);
+                            }
+                            case 2 -> {
                                 System.err.println(taiKhoan2.getPermission_id());
-                                MenuleftGUI menuleft = new MenuleftGUI(true, true, false, true, true, false, false, false, false);
+                                MenuleftGUI menuleft = new MenuleftGUI(true, false, false, false, true, false, false, false, false,true);
                                 menuleft.setVisible(true);
-                                break;
                             }
-                            case 2: {
-                                MenuleftGUI menuleft = new MenuleftGUI(true, false, false, false, true, false, false, false, false);
-                                menuleft.setVisible(true);
-                                break;
+                            default -> {
                             }
-                            default:
-                                break;
                         }
-                        JOptionPane.showMessageDialog(contentPane, "Đăng NhậpThành Công !");
+                        JOptionPane.showMessageDialog(contentPane, "Đăng Nhập Thành Công !");
                         isdangnhap = true;
                         dangnhap = true;
                         setVisible(false);
@@ -214,6 +209,7 @@ public class LoginGUI extends JFrame {
         pass = pref.get("Password", pass);
         txtUser.setText(usr);
         txtPass.setText(pass);
+
     }
 
     public void savenmailpass(String Email, String Pass) {

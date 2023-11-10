@@ -87,7 +87,7 @@
                   <Component id="jPanel2" max="32767" attributes="0"/>
                   <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="17" max="32767" attributes="0"/>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -120,18 +120,16 @@
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtBorrowId" max="32767" attributes="0"/>
-                          <Component id="cbStaffId" max="32767" attributes="0"/>
-                          <Component id="cbReaderId" max="32767" attributes="0"/>
-                          <Component id="dateChooser" pref="196" max="32767" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="cbStaffId" max="32767" attributes="0"/>
+                      <Component id="cbReaderId" max="32767" attributes="0"/>
+                      <Component id="dateChooser" pref="196" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="rdmuon" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                           <Component id="rdtra" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="lblBrrowID" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -149,9 +147,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtBorrowId" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnAddBorrow" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblBrrowID" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -222,11 +220,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="T&#xec;nh Tr&#x1ea1;ng"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtBorrowId">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBorrowIdActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="cbStaffId">
           <Properties>
@@ -321,6 +314,8 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResetBorrowActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblBrrowID">
         </Component>
       </SubComponents>
     </Container>
@@ -476,9 +471,9 @@
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtNote" min="-2" pref="180" max="-2" attributes="0"/>
-                              <Component id="dateChooser_pay" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="dateChooser_pay" pref="180" max="32767" attributes="0"/>
+                              <Component id="lblNote" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
@@ -500,11 +495,11 @@
                       <Component id="dateChooser_pay" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtNote" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblNote" pref="22" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnAddBorrowDetail" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnDeleteBorrowDetail" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -544,8 +539,6 @@
           </Events>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="dateChooser_pay">
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtNote">
         </Component>
         <Component class="javax.swing.JButton" name="btnAddBorrowDetail">
           <Properties>
@@ -596,6 +589,8 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblNote">
         </Component>
       </SubComponents>
     </Container>

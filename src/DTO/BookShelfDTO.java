@@ -1,7 +1,7 @@
 package DTO;
 public class BookShelfDTO {
     private int bookshelfid;
-    private String location;
+        private String location;
 
     public BookShelfDTO(int bookshelfid, String location) {
         this.bookshelfid = bookshelfid;

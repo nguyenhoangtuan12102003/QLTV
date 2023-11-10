@@ -9,8 +9,8 @@ package DTO;
  * @author PC
  */
 public class ReaderDTO {
-    private int reader_id;
-    private String readerName;
+        private int reader_id;
+        private String readerName;
     private String gender;
     private String address;
     private String phoneNumber;

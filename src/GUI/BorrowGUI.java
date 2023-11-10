@@ -77,7 +77,6 @@ public class BorrowGUI extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtBorrowId = new javax.swing.JTextField();
         cbStaffId = new javax.swing.JComboBox<>();
         cbReaderId = new javax.swing.JComboBox<>();
         dateChooser = new com.toedter.calendar.JDateChooser();
@@ -87,6 +86,7 @@ public class BorrowGUI extends javax.swing.JPanel {
         btnDeleteBorrow = new javax.swing.JButton();
         btnEditBorrow = new javax.swing.JButton();
         btnResetBorrow = new javax.swing.JButton();
+        lblBrrowID = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbBorrow = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
@@ -101,12 +101,12 @@ public class BorrowGUI extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         btnBook = new javax.swing.JButton();
         dateChooser_pay = new com.toedter.calendar.JDateChooser();
-        txtNote = new javax.swing.JTextField();
         btnAddBorrowDetail = new javax.swing.JButton();
         btnDeleteBorrowDetail = new javax.swing.JButton();
         btnEditBorrowDetail = new javax.swing.JButton();
         btnResetBorrowDetail = new javax.swing.JButton();
         txtBookIdBorrow = new javax.swing.JTextField();
+        lblNote = new javax.swing.JLabel();
         txtSearchBorrow = new javax.swing.JTextField();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -120,12 +120,6 @@ public class BorrowGUI extends javax.swing.JPanel {
         jLabel4.setText("Ngày Mượn");
 
         jLabel5.setText("Tình Trạng");
-
-        txtBorrowId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBorrowIdActionPerformed(evt);
-            }
-        });
 
         rdmuon.setText("Mượn");
         rdmuon.addActionListener(new java.awt.event.ActionListener() {
@@ -187,16 +181,15 @@ public class BorrowGUI extends javax.swing.JPanel {
                             .addComponent(jLabel5)))
                     .addComponent(jLabel3))
                 .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtBorrowId)
-                        .addComponent(cbStaffId, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cbReaderId, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(dateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbStaffId, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbReaderId, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(rdmuon)
                         .addGap(39, 39, 39)
-                        .addComponent(rdtra)))
+                        .addComponent(rdtra))
+                    .addComponent(lblBrrowID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnDeleteBorrow, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,9 +203,9 @@ public class BorrowGUI extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBorrowId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(btnAddBorrow))
+                    .addComponent(btnAddBorrow)
+                    .addComponent(lblBrrowID, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -390,9 +383,9 @@ public class BorrowGUI extends javax.swing.JPanel {
                         .addComponent(btnBook, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNote, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateChooser_pay, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(dateChooser_pay, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(lblNote, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -407,10 +400,10 @@ public class BorrowGUI extends javax.swing.JPanel {
                     .addComponent(jLabel8)
                     .addComponent(dateChooser_pay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel9)
-                    .addComponent(txtNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(lblNote, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddBorrowDetail)
                     .addComponent(btnDeleteBorrowDetail))
@@ -475,13 +468,9 @@ public class BorrowGUI extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtBorrowIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBorrowIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBorrowIdActionPerformed
 
     private void rdmuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdmuonActionPerformed
         // TODO add your handling code here:
@@ -599,6 +588,8 @@ public class BorrowGUI extends javax.swing.JPanel {
         }
     }
 
+
+
     private void btnSearchBorrowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchBorrowActionPerformed
         if (!isNumber(txtSearchBorrow.getText())) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập vào số !");
@@ -641,13 +632,11 @@ public class BorrowGUI extends javax.swing.JPanel {
         int i = tbBorrow.getSelectedRow();
         if (i >= 0) {
 
-            txtBorrowId.setText(dtBorrow.getValueAt(i, 0).toString());
+            lblBrrowID.setText(dtBorrow.getValueAt(i, 0).toString());
             id = (dtBorrow.getValueAt(i, 0).toString());
 
             String staffId = tbBorrow.getValueAt(i, 1).toString();
             String readerId = tbBorrow.getValueAt(i, 2).toString();
-//            cbStaffId.setSelectedItem(staffId);
-//            cbReaderId.setSelectedItem(readerId);
             try {
                 Date date = new SimpleDateFormat("yyyy-MM-dd").parse((String) dtBorrow.getValueAt(i, 3).toString());
                 dateChooser.setDate(date);
@@ -656,7 +645,7 @@ public class BorrowGUI extends javax.swing.JPanel {
             }
             String status = tbBorrow.getValueAt(i, 4).toString();
 
-            if (status.equals("Đã mượn")) {
+            if (status.equals("Đang Mượn")) {
                 rdmuon.setSelected(true);
                 rdmuon.setSelected(false);
             } else if (status.equals("Đã Trả")) {
@@ -692,7 +681,6 @@ public class BorrowGUI extends javax.swing.JPanel {
                     dtBorrowDetail.addRow(vec);
                 }
             }
-
         }
     }
 
@@ -720,7 +708,7 @@ public class BorrowGUI extends javax.swing.JPanel {
                 date2 = new SimpleDateFormat("yyyy-MM-dd").parse((String) dtBorrowDetail.getValueAt(i, 3).toString());
                 dateChooser_pay.setDate(date2);
                 txtBookIdBorrow.setText(dtBorrowDetail.getValueAt(i, 2).toString());
-                txtNote.setText(dtBorrowDetail.getValueAt(i, 4).toString());
+                lblNote.setText(dtBorrowDetail.getValueAt(i, 4).toString());
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -734,7 +722,7 @@ public class BorrowGUI extends javax.swing.JPanel {
         String ngaymuon2;
         String ngaytra;
         try {
-            String txtNoteValue  = "";
+            String txtNoteValue = "";
             ngaytra = sdf.format(dateChooser_pay.getDate());
             ngaymuon2 = sdf.format(dateChooser.getDate());
             if (sdf.parse(ngaymuon2).after(sdf.parse(ngaytra))) {
@@ -743,17 +731,17 @@ public class BorrowGUI extends javax.swing.JPanel {
                 txtNoteValue = "Chưa hết hạn";
             } else {
                 txtNoteValue = "Hôm nay là hạn cuối";
-            } 
-            txtNote.setText(txtNoteValue);
+            }
+            lblNote.setText(txtNoteValue);
         } catch (Exception e2) {
             JOptionPane.showMessageDialog(null, "Ngày sai");
             return;
         }
-        if (!isNumber(txtBorrowId.getText())) {
+        if (!isNumber(lblBrrowID.getText())) {
             JOptionPane.showMessageDialog(null, "Mã phiếu mượn sai");
             return;
         }
-        if (!isNumber(txtBorrowId.getText())) {
+        if (!isNumber(lblBrrowID.getText())) {
             JOptionPane.showMessageDialog(null, "Mã phiếu mượn sai");
             return;
         }
@@ -762,8 +750,8 @@ public class BorrowGUI extends javax.swing.JPanel {
             return;
         }
 
-        BorrowDetailDTO brdt = new BorrowDetailDTO(0, Integer.parseInt(txtBorrowId.getText()),
-                Integer.parseInt(txtBookIdBorrow.getText()), ngaymuon2, ngaytra, txtNote.getText());
+        BorrowDetailDTO brdt = new BorrowDetailDTO(0, Integer.parseInt(lblBrrowID.getText()),
+                Integer.parseInt(txtBookIdBorrow.getText()), ngaymuon2, ngaytra, lblNote.getText());
         int j = borrowDetailBUS.addBorrowDetail(brdt);
         if (j > 0) {
             loadBorrowDetail();
@@ -776,9 +764,9 @@ public class BorrowGUI extends javax.swing.JPanel {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String borrow_pay = sdf.format(dateChooser_pay.getDate());
             int location = Integer.parseInt(tbBorrowDetail.getValueAt(i, 0).toString());
-            int borrow_id = Integer.parseInt(txtBorrowId.getText());
+            int borrow_id = Integer.parseInt(lblBrrowID.getText());
             int book_id = Integer.parseInt(txtBookIdBorrow.getText());
-            BorrowDetailDTO brdt = new BorrowDetailDTO(location, borrow_id, book_id, borrow_pay, txtNote.getText());
+            BorrowDetailDTO brdt = new BorrowDetailDTO(location, borrow_id, book_id, borrow_pay, lblNote.getText());
             int a = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa", "", JOptionPane.YES_NO_OPTION);
             if (a == JOptionPane.YES_OPTION) {
                 int j = borrowDetailBUS.deleteBorrowDetail(brdt);
@@ -902,13 +890,13 @@ public class BorrowGUI extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblBrrowID;
+    private javax.swing.JLabel lblNote;
     public javax.swing.JRadioButton rdmuon;
     public javax.swing.JRadioButton rdtra;
     private javax.swing.JTable tbBorrow;
     private javax.swing.JTable tbBorrowDetail;
     public static javax.swing.JTextField txtBookIdBorrow;
-    private javax.swing.JTextField txtBorrowId;
-    private javax.swing.JTextField txtNote;
     private javax.swing.JTextField txtSearchBorrow;
     // End of variables declaration//GEN-END:variables
 }
