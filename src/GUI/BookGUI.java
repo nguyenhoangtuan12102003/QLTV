@@ -72,7 +72,6 @@ public class BookGUI extends javax.swing.JPanel {
     public BookGUI() {
         initComponents();
         tableModel = (DefaultTableModel) jTable1.getModel();
-//        model = (DefaultComboBoxModel) cbPublish.getModel();
         loadBook();
         add();
         // thêm sách
@@ -617,18 +616,18 @@ public class BookGUI extends javax.swing.JPanel {
         src = src.trim().equals("") ? "default.png" : src;
         // Xử lý ảnh
         BufferedImage img = null;
-        File fileImg = new File("img/book/" + src);
+        File fileImg = new File("img/" + src);
 
         if (!fileImg.exists()) {
             src = "default.png";
-            fileImg = new File("img/book/" + src);
+            fileImg = new File("img/" + src);
         }
 
         try {
             img = ImageIO.read(fileImg);
-            fileimagebook = new File("img/book/" + src);
+            fileimagebook = new File("img/" + src);
         } catch (IOException e) {
-            fileimagebook = new File("img/book/default.png");
+            fileimagebook = new File("img/default.png");
         }
 
         if (img != null) {
@@ -641,7 +640,7 @@ public class BookGUI extends javax.swing.JPanel {
 
     // chọn ảnh
     public void selectimage() {
-        JFileChooser fileChooser = new JFileChooser("img/book/");
+        JFileChooser fileChooser = new JFileChooser("img/");
         FileNameExtensionFilter filter = new FileNameExtensionFilter("jpg", "png");
         fileChooser.setFileFilter(filter);
         int returnVal = fileChooser.showOpenDialog(null);
@@ -933,7 +932,7 @@ public class BookGUI extends javax.swing.JPanel {
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );

@@ -4,17 +4,52 @@
  */
 package GUI;
 
+import BUS.BookBUS;
+import BUS.ReaderBUS;
+import DAL.BorrowBookDAL;
+import DAL.BorrowDetailDAL;
+import DTO.BookDTO;
+import DTO.BorrowBookDTO;
+import DTO.BorrowDTO;
+import DTO.CartBookDTO;
+import DTO.ReaderDTO;
+import DTO.StaffDTO;
+import static GUI.BorrowGUI.borrowdetail;
+import static GUI.BorrowGUI.id;
+import static GUI.BorrowGUI.listreader;
+import static GUI.BorrowGUI.liststaff;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Vector;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ASUS
  */
 public class BorrowBooks extends javax.swing.JPanel {
 
+    private final DefaultTableModel tbListBook;
+    ReaderBUS readerBUS = new ReaderBUS();
+    private String image = "";
+    File fileimagebook;
+
     /**
      * Creates new form BorrowBooks
      */
     public BorrowBooks() {
         initComponents();
+        tbListBook = (DefaultTableModel) tbbook.getModel();
+        loadReaderId();
+
     }
 
     /**
@@ -28,53 +63,90 @@ public class BorrowBooks extends javax.swing.JPanel {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbbook = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        date_start = new com.toedter.calendar.JDateChooser();
+        date_end = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-        jButton1 = new javax.swing.JButton();
+        spQuantity = new javax.swing.JSpinner();
+        btnAddCart = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        lblBookId = new javax.swing.JLabel();
-        lblBookName = new javax.swing.JLabel();
+        lblBook = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        cbListReader = new javax.swing.JComboBox<>();
+        lblLoai = new javax.swing.JLabel();
+        lblImage = new javax.swing.JLabel();
+        lblBookName = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         jTabbedPane1.setName(""); // NOI18N
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Mã Sách", "Mã Độc Giả", "Ngày Mượn", "Số Lượng", "Ngày Trả", "Trạng thái"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable3);
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton1.setText("Trả Sách");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1197, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(261, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 602, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(243, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Trả Sách", jPanel2);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 204, 51));
         jLabel1.setText("Sách Của Thư Viện");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 180, 40));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbbook.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -85,81 +157,110 @@ public class BorrowBooks extends javax.swing.JPanel {
                 "Mã Sách", "Tên Sách", "Tên Tác Giả", "Tên Nhà Xuất Bản", "Thể Loại", "Còn Lại", "Hình Ảnh"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tbbook.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                tbbookAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        tbbook.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbbookMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbbook);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 670, 243));
 
-        jLabel3.setText("Loại Sách:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 110, 61, -1));
-
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 110, 150, -1));
+        jLabel3.setText("Thể Loại");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 150, 61, -1));
 
         jLabel4.setText("Mã Sách");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 150, 61, -1));
-
-        jLabel6.setText("Tên Sách");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 180, 61, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 90, 61, -1));
 
         jLabel8.setText("Ngày Mượn");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 210, -1, -1));
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 210, 150, -1));
-        jPanel1.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 240, 150, -1));
+        jPanel1.add(date_start, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 210, 150, -1));
+        jPanel1.add(date_end, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 240, 150, -1));
 
         jLabel9.setText("Ngày Trả");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 240, 62, 22));
 
         jLabel10.setText("Số Lượng");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 270, 62, -1));
-        jPanel1.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 270, 150, -1));
 
-        jButton1.setText("Thêm vào giỏ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        spQuantity.setRequestFocusEnabled(false);
+        spQuantity.setValue(1);
+        jPanel1.add(spQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 270, 150, -1));
+
+        btnAddCart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/11_add.png"))); // NOI18N
+        btnAddCart.setText("Thêm vào giỏ");
+        btnAddCart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAddCartActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 310, 117, 35));
+        jPanel1.add(btnAddCart, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 310, 140, 35));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 102, 204));
         jLabel5.setText("Chi Tiết Về Sách");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 60, 140, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 50, 140, -1));
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/14_delete.png"))); // NOI18N
         jButton2.setText("Xóa ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 530, 112, 34));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 540, 112, 34));
 
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/19_taophieu.png"))); // NOI18N
         jButton3.setText("Tạo Phiếu Mượn");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 530, -1, 34));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 540, -1, 34));
+        jPanel1.add(lblBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 90, 150, 20));
 
-        lblBookId.setText("jLabel7");
-        jPanel1.add(lblBookId, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 150, 150, -1));
-
-        lblBookName.setText("jLabel11");
-        jPanel1.add(lblBookName, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 180, 150, -1));
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 153, 51));
         jLabel13.setText("Giỏ Sách");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, 79, -1));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Sách", "Tên Sách", "Số Lượng", "Ngày Mượn", "Ngày Trả"
+                "Mã Sách", "Mã Độc Giả", "Ngày Mượn", "Ngày Trả", "Số Lượng", "Trạng thái"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 670, 240));
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 360, 140, 150));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 670, 240));
+
+        jLabel7.setText("Mã Độc Giả");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 180, -1, -1));
+
+        cbListReader.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbListReaderActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cbListReader, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 180, 150, -1));
+        jPanel1.add(lblLoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 150, 150, 20));
+
+        lblImage.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanel1.add(lblImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 360, 180, 160));
+        jPanel1.add(lblBookName, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 120, 140, 20));
+
+        jLabel6.setText("Tên Sách");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 120, -1, -1));
 
         jTabbedPane1.addTab("Mượn Sách", jPanel1);
 
@@ -184,37 +285,148 @@ public class BorrowBooks extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnAddCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCartActionPerformed
+        String selectedReaderId = (String) cbListReader.getSelectedItem();
+        if (selectedReaderId.equals("0-Chọn mã độc giả")) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn mã độc giả", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (date_start.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Bạn chưa chọn ngày mượn !");
+            return;
+        }
+        if (date_end.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Bạn chưa chọn ngày trả !");
+            return;
+        }
+        int value = (int) spQuantity.getValue();
+        if (value <= 0) {
+            JOptionPane.showMessageDialog(null, "Số lượng phải lớn hơn 0 !", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String book_shelf = lblLoai.getText();
+        String bookIdText = lblBook.getText();
+        int book_id = Integer.parseInt(bookIdText);
+        //lấy giá trị
+        String[] parts2 = selectedReaderId.split("-");
+        int readerId = Integer.parseInt(parts2[0]);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date_start = sdf.format(date_end.getDate());
+        String date_end = sdf.format(this.date_end.getDate());
+        CartBookDTO cart = new CartBookDTO(book_id, readerId, book_shelf, date_start, date_end, value);
+
+    }//GEN-LAST:event_btnAddCartActionPerformed
+
+    private ArrayList<BorrowBookDTO> booklist;
+
+    private void tbbookAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tbbookAncestorAdded
+        booklist = new BorrowBookDAL().getAllBook();
+        tbListBook.setRowCount(0);
+        for (BorrowBookDTO dtoo : booklist) {
+            Vector vec = new Vector();
+            vec.add(dtoo.getBook_id());
+            vec.add(dtoo.getBook_name());
+            vec.add(dtoo.getAuthor_name());
+            vec.add(dtoo.getPublish_name());
+            vec.add(dtoo.getBook_shelf());
+            vec.add(dtoo.getRemain());
+            vec.add(dtoo.getImage());
+            tbListBook.addRow(vec);
+        }
+    }//GEN-LAST:event_tbbookAncestorAdded
+    public void loadReaderId() {
+        cbListReader.removeAllItems();
+        ArrayList<ReaderDTO> readerarr = readerBUS.getListReader();
+        cbListReader.addItem("0-Chọn mã độc giả");
+        for (ReaderDTO reader : readerarr) {
+            cbListReader.addItem(reader.getReader_id() + "-" + reader.getReaderName());
+        }
+    }
+    private void cbListReaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbListReaderActionPerformed
+
+    }//GEN-LAST:event_cbListReaderActionPerformed
+    private void tbbookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbbookMouseClicked
+
+        int selectedRow = tbbook.getSelectedRow();
+        if (selectedRow >= 0) { // Sửa điều kiện kiểm tra selectedRow
+            // Lấy giá trị từ cột 0 và cột 1 của bảng
+            int book_id = Integer.parseInt(tbbook.getValueAt(selectedRow, 0).toString());
+            String book_shelf = tbbook.getValueAt(selectedRow, 4).toString();
+            image = tbbook.getValueAt(selectedRow, 6).toString();
+            String book_name = tbbook.getValueAt(selectedRow, 1).toString();
+            lblBook.setText(String.valueOf(book_id));
+            lblLoai.setText(book_shelf);
+            lblBookName.setText(book_name);
+            lblImage.setIcon(getimage(image));
+        }
+    }//GEN-LAST:event_tbbookMouseClicked
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private ImageIcon getimage(String src) {
+        src = src.trim().equals("") ? "default.png" : src;
+        // Xử lý ảnh
+        BufferedImage img = null;
+        File fileImg = new File("img/book" + src);
+
+        if (!fileImg.exists()) {
+            src = "default.png";
+            fileImg = new File("img/book" + src);
+        }
+
+        try {
+            img = ImageIO.read(fileImg);
+            fileimagebook = new File("img/book" + src);
+        } catch (IOException e) {
+            fileimagebook = new File("img/book/default.png");
+        }
+        if (img != null) {
+            Image dimg = img.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+
+            return new ImageIcon(dimg);
+        }
+        return null;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddCart;
+    private javax.swing.JComboBox<String> cbListReader;
+    private com.toedter.calendar.JDateChooser date_end;
+    private com.toedter.calendar.JDateChooser date_start;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JLabel lblBookId;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JLabel lblBook;
     private javax.swing.JLabel lblBookName;
+    private javax.swing.JLabel lblImage;
+    private javax.swing.JLabel lblLoai;
+    private javax.swing.JSpinner spQuantity;
+    private javax.swing.JTable tbbook;
     // End of variables declaration//GEN-END:variables
+
+    private void tbbookAncestorAdded() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

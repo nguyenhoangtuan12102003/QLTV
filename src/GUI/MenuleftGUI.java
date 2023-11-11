@@ -36,6 +36,8 @@ public class MenuleftGUI extends JFrame {
     private final JPanel panelCoupon;
     public boolean isMouseOver = false;
     private JPanel panelBorrowBooks;
+    private JPanel panelAccount;
+    private JLabel lblAccount;
 
     public MenuleftGUI() {
 
@@ -387,10 +389,10 @@ public class MenuleftGUI extends JFrame {
         title();
     }
 
-    public MenuleftGUI(boolean Home, boolean Book, boolean Author, boolean Staff, boolean Reader, boolean Publish, boolean Statis, boolean Borrow, boolean Coupon, boolean BorrowBook) {
+    public MenuleftGUI(boolean Home, boolean Book, boolean Author, boolean Staff, boolean Reader, boolean Statis, boolean Borrow, boolean Coupon, boolean BorrowBook,boolean Account) {
 
         setUndecorated(true);
-        setBounds(50, 50, 1250, 750);
+        setBounds(50, 50, 1250, 700);
         contentPane = new JPanel();
         cardlayout = new CardLayout();
         contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -424,12 +426,7 @@ public class MenuleftGUI extends JFrame {
         ReaderGUI reader = new ReaderGUI();
         panelreader.setLayout(new BorderLayout());
         panelreader.add(reader, BorderLayout.CENTER);
-        // Jpanel Publish
-        panelPublish = new JPanel();
-        PublishGUI publish = new PublishGUI();
-        panelPublish.setLayout(new BorderLayout());
-        panelPublish.add(publish, BorderLayout.CENTER);
-        // Jpanel Statistical
+        //statis
         panelStatis = new JPanel();
 //        Statistical_2GUI statis = new Statistical_2GUI();
         Statistical_GUI statis = new Statistical_GUI();
@@ -451,6 +448,11 @@ public class MenuleftGUI extends JFrame {
         BorrowBooks borrowBook = new BorrowBooks();
         panelBorrowBooks.setLayout(new BorderLayout());
         panelBorrowBooks.add(borrowBook, BorderLayout.CENTER);
+        //JPanel Account
+        panelAccount = new JPanel();
+        AccountGUI accountGUI = new AccountGUI();
+        panelAccount.setLayout(new BorderLayout());
+        panelAccount.add(accountGUI, BorderLayout.CENTER);
 
         JPanel cardPanel = new JPanel(cardlayout);
         cardPanel.add(panelHome, "home");
@@ -463,8 +465,6 @@ public class MenuleftGUI extends JFrame {
 
         cardPanel.add(panelreader, "reader");
 
-        cardPanel.add(panelPublish, "publish");
-
         cardPanel.add(panelStatis, "statis");
 
         cardPanel.add(panelBorrow, "borrow");
@@ -472,11 +472,12 @@ public class MenuleftGUI extends JFrame {
         cardPanel.add(panelCoupon, "coupon");
 
         cardPanel.add(panelBorrowBooks, "borrowBook");
+        cardPanel.add(panelAccount, "accountGUI");
 
         //create menuleft
         menuleft = new JPanel();
         // Menu bar on the left
-        menuleft.setPreferredSize(new Dimension(180, 750));
+        menuleft.setPreferredSize(new Dimension(180, 700));
         menuleft.setBackground(new Color(0, 206, 209));
         contentPane.add(menuleft, BorderLayout.WEST);
         menuleft.setLayout(null);
@@ -489,16 +490,15 @@ public class MenuleftGUI extends JFrame {
         menuleft.add(panel);
         // Home
         lblhome = new JLabel("Trang Chủ");
-
         lblbook = new JLabel("Sách");
         lblauthor = new JLabel("Tác Giả");
         lblstaff = new JLabel("Nhân Viên");
-        lblpublish = new JLabel("Nhà Xuất Bản");
         lblreader = new JLabel("Độc Giả");
         lblstatis = new JLabel("Thống Kê");
         lblborrow = new JLabel("Phiếu Mượn");
         lblimport = new JLabel("Phiếu Nhập");
-        lblBorrowBook = new JLabel("Mượn Sách");
+        lblBorrowBook = new JLabel("Mượn Trả");
+        lblAccount = new JLabel("Tài Khoản");
 
         if (Home) {
             lblhome.setBackground(new Color(64, 64, 64));
@@ -517,21 +517,31 @@ public class MenuleftGUI extends JFrame {
             menuleft.remove(lblborrow);
             menuleft.remove(lblimport);
             menuleft.remove(lblstatis);
-            menuleft.remove(lblpublish);
             menuleft.remove(lblreader);
 
         }
-
+        if (BorrowBook) {
+            lblBorrowBook.setBackground(new Color(64, 64, 64));
+            lblBorrowBook.setOpaque(true);
+            lblBorrowBook.setForeground(Color.white);
+            lblBorrowBook.setFont(new Font("Tahoma", Font.BOLD, 18));
+            lblBorrowBook.setIcon(new ImageIcon(getClass().getResource("/img/10_borrowbook.png")));
+            lblBorrowBook.setBackground(new Color(0, 206, 209));
+            lblBorrowBook.setBounds(0, 110, 180, 50);
+            lblBorrowBook.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            menuleft.add(lblBorrowBook);
+        } else {
+            menuleft.remove(lblBorrowBook);
+        }
         //book
         if (Book) {
-
             lblbook.setBackground(new Color(64, 64, 64));
             lblbook.setOpaque(true);
             lblbook.setForeground(Color.white);
             lblbook.setFont(new Font("Tahoma", Font.BOLD, 18));
             lblbook.setIcon(new ImageIcon(getClass().getResource("/img/5_book.png")));
             lblbook.setBackground(new Color(0, 206, 209));
-            lblbook.setBounds(0, 110, 180, 50);
+            lblbook.setBounds(0, 165, 180, 50);
             lblbook.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             menuleft.add(lblbook);
         } else {
@@ -547,7 +557,7 @@ public class MenuleftGUI extends JFrame {
             lblauthor.setFont(new Font("Tahoma", Font.BOLD, 18));
             lblauthor.setIcon(new ImageIcon(getClass().getResource("/img/7_author.png")));
             lblauthor.setBackground(new Color(0, 206, 209));
-            lblauthor.setBounds(0, 165, 180, 50);
+            lblauthor.setBounds(0, 210, 180, 50);
             lblauthor.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             menuleft.add(lblauthor);
         } else {
@@ -563,28 +573,11 @@ public class MenuleftGUI extends JFrame {
             lblstaff.setFont(new Font("Tahoma", Font.BOLD, 18));
             lblstaff.setIcon(new ImageIcon(getClass().getResource("/img/4_staff.png")));
             lblstaff.setBackground(new Color(0, 206, 209));
-            lblstaff.setBounds(0, 220, 180, 50);
+            lblstaff.setBounds(0, 265, 180, 50);
             lblstaff.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             menuleft.add(lblstaff);
         } else {
             menuleft.remove(lblstaff);
-        }
-
-        // publish
-        if (Publish) {
-
-            lblpublish.setBackground(new Color(64, 64, 64));
-            lblpublish.setOpaque(true);
-            lblpublish.setForeground(Color.white);
-            lblpublish.setFont(new Font("Tahoma", Font.BOLD, 18));
-            lblpublish.setIcon(new ImageIcon(getClass().getResource("/img/10_publish.png")));
-            lblpublish.setBackground(new Color(0, 206, 209));
-            lblpublish.setBounds(0, 275, 180, 50);
-            lblpublish.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            menuleft.add(lblpublish);
-
-        } else {
-            menuleft.remove(lblpublish);
         }
 
         // reader
@@ -596,7 +589,7 @@ public class MenuleftGUI extends JFrame {
             lblreader.setFont(new Font("Tahoma", Font.BOLD, 18));
             lblreader.setIcon(new ImageIcon(getClass().getResource("/img/2_reader.png")));
             lblreader.setBackground(new Color(0, 206, 209));
-            lblreader.setBounds(0, 330, 180, 50);
+            lblreader.setBounds(0, 320, 180, 50);
             lblreader.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             menuleft.add(lblreader);
 
@@ -605,21 +598,6 @@ public class MenuleftGUI extends JFrame {
         }
 
         // statis thống kê
-        if (Statis) {
-
-            lblstatis.setBackground(new Color(64, 64, 64));
-            lblstatis.setOpaque(true);
-            lblstatis.setForeground(Color.white);
-            lblstatis.setFont(new Font("Tahoma", Font.BOLD, 18));
-            lblstatis.setIcon(new ImageIcon(getClass().getResource("/img/4_staff.png")));
-            lblstatis.setBackground(new Color(0, 206, 209));
-            lblstatis.setBounds(0, 385, 180, 50);
-            lblstatis.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            menuleft.add(lblstatis);
-        } else {
-            menuleft.remove(lblstatis);
-        }
-
         // borrow
         if (Borrow) {
 
@@ -629,7 +607,7 @@ public class MenuleftGUI extends JFrame {
             lblborrow.setFont(new Font("Tahoma", Font.BOLD, 18));
             lblborrow.setIcon(new ImageIcon(getClass().getResource("/img/6_borrow.png")));
             lblborrow.setBackground(new Color(0, 206, 209));
-            lblborrow.setBounds(0, 440, 180, 50);
+            lblborrow.setBounds(0, 375, 180, 50);
             lblborrow.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             menuleft.add(lblborrow);
 
@@ -646,30 +624,41 @@ public class MenuleftGUI extends JFrame {
             lblimport.setFont(new Font("Tahoma", Font.BOLD, 18));
             lblimport.setIcon(new ImageIcon(getClass().getResource("/img/8_import.png")));
             lblimport.setBackground(new Color(0, 206, 209));
-            lblimport.setBounds(0, 495, 180, 50);
+            lblimport.setBounds(0, 430, 180, 50);
             lblimport.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             menuleft.add(lblimport);
 
         } else {
             menuleft.remove(lblimport);
         }
-        //muon sach
-        if (BorrowBook) {
+        //thong ke
+        if (Statis) {
 
-            lblBorrowBook.setBackground(new Color(64, 64, 64));
-            lblBorrowBook.setOpaque(true);
-            lblBorrowBook.setForeground(Color.white);
-            lblBorrowBook.setFont(new Font("Tahoma", Font.BOLD, 18));
-            lblBorrowBook.setIcon(new ImageIcon(getClass().getResource("/img/10_borrowbook.png")));
-            lblBorrowBook.setBackground(new Color(0, 206, 209));
-            lblBorrowBook.setBounds(0, 495, 180, 50);
-            lblBorrowBook.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            menuleft.add(lblBorrowBook);
-
+            lblstatis.setBackground(new Color(64, 64, 64));
+            lblstatis.setOpaque(true);
+            lblstatis.setForeground(Color.white);
+            lblstatis.setFont(new Font("Tahoma", Font.BOLD, 18));
+            lblstatis.setIcon(new ImageIcon(getClass().getResource("/img/4_staff.png")));
+            lblstatis.setBackground(new Color(0, 206, 209));
+            lblstatis.setBounds(0, 485, 180, 50);
+            lblstatis.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            menuleft.add(lblstatis);
         } else {
-            menuleft.remove(lblBorrowBook);
+            menuleft.remove(lblstatis);
         }
-
+        if (Account) {
+            lblAccount.setBackground(new Color(64, 64, 64));
+            lblAccount.setOpaque(true);
+            lblAccount.setForeground(Color.white);
+            lblAccount.setFont(new Font("Tahoma", Font.BOLD, 18));
+            lblAccount.setIcon(new ImageIcon(getClass().getResource("/img/20_account.png")));
+            lblAccount.setBackground(new Color(0, 206, 209));
+            lblAccount.setBounds(0, 540, 180, 50);
+            lblAccount.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            menuleft.add(lblAccount);
+        } else {
+            menuleft.remove(lblAccount);
+        }
         //
         // card layout
         contentPane.add(cardPanel, BorderLayout.CENTER);
@@ -782,33 +771,6 @@ public class MenuleftGUI extends JFrame {
             @Override
             public void mouseExited(MouseEvent e) {
                 lblstaff.setBackground(new Color(0, 206, 209));
-            }
-        });
-        // publish
-        lblpublish.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                cardlayout.show(cardPanel, "publish");
-                lblpublish.setBackground(Color.GRAY);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                lblpublish.setBackground(new Color(0, 206, 209));
             }
         });
         // reader
@@ -941,6 +903,32 @@ public class MenuleftGUI extends JFrame {
             @Override
             public void mouseExited(MouseEvent e) {
                 lblBorrowBook.setBackground(new Color(0, 206, 209));
+            }
+        });
+         lblAccount.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                cardlayout.show(cardPanel, "accountGUI");
+                lblBorrowBook.setBackground(Color.GRAY);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                lblAccount.setBackground(new Color(0, 206, 209));
             }
         });
         title();

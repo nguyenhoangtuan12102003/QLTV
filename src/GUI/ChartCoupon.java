@@ -19,12 +19,12 @@ import org.jfree.data.category.DefaultCategoryDataset;
  *
  * @author ASUS
  */
-public class ChartCoupn extends javax.swing.JFrame {
+public class ChartCoupon extends javax.swing.JFrame {
 
     /**
      * Creates new form ChartCoupn
      */
-    public ChartCoupn() {
+    public ChartCoupon() {
         initComponents();
     }
 
@@ -84,7 +84,8 @@ public class ChartCoupn extends javax.swing.JFrame {
             for(StatisDTO item : listItem){
                 dataset.addValue(item.getSoLuongSachNhap(),"Sach Nhap",item.getNgayNhap());
             }
-            JFreeChart chart = ChartFactory.createBarChart("THONG KE SO LUONG SACH NHAP", "THOI GIAN", "SO LUONG", dataset);
+            JFreeChart chart = ChartFactory.createBarChart("THONG KE SO LUONG SACH NHAP", 
+                    "THOI GIAN", "SO LUONG", dataset);  
             ChartPanel chartPanel = new ChartPanel(chart);
             chartPanel.setPreferredSize(new Dimension(jpanel.getWidth(),300));
             jpanel.removeAll();
@@ -108,20 +109,21 @@ public class ChartCoupn extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ChartCoupn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChartCoupon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ChartCoupn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChartCoupon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ChartCoupn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChartCoupon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ChartCoupn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChartCoupon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ChartCoupn chart = new ChartCoupn();
+                ChartCoupon chart = new ChartCoupon();
                 chart.setDateToChart(panelCoupon);
                 chart.setVisible(true);
             }

@@ -161,17 +161,17 @@ public class LoginGUI extends JFrame {
                     if (taiKhoan2.getUsername().trim().equals(txtUser.getText().trim()) && taiKhoan2.getPassword().trim().equals(txtPass.getText().trim())) {
                         switch (taiKhoan2.getPermission_id()) {
                             case 0 -> {
-                                MenuleftGUI menuleft = new MenuleftGUI(true, true, true, true, true, true, true, true, true,true);
+                                MenuleftGUI menuleft = new MenuleftGUI(true, true, true, true, true, true, true, true,true,true);
                                 menuleft.setVisible(true);
                             }
                             case 1 -> {
 
-                                MenuleftGUI menuleft = new MenuleftGUI(true, true, false, true, true, false, false, false, false,true);
+                                MenuleftGUI menuleft = new MenuleftGUI(true, true, false, true, false, false, false, false,true,false);
                                 menuleft.setVisible(true);
                             }
                             case 2 -> {
                                 System.err.println(taiKhoan2.getPermission_id());
-                                MenuleftGUI menuleft = new MenuleftGUI(true, false, false, false, true, false, false, false, false,true);
+                                MenuleftGUI menuleft = new MenuleftGUI(true, false, false, false, false, false, false, false,true,false);
                                 menuleft.setVisible(true);
                             }
                             default -> {
